@@ -1,1 +1,159 @@
-/* Caso queira utilizar framework como Bootstrap para estilização, pode utilizar. Basta ignoar esse arquivo */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --clr-bg:        #9fc3e7;
+  --clr-surface:   #ffffff;
+  --clr-primary:   #1a6b9a;
+  --clr-primary-h: #145780;
+  --clr-text:      #1e2b36;
+  --clr-muted:     #6b7c8d;
+  --clr-border:    #d4e0ea;
+  --clr-ok:        #1a7a4a;
+  --clr-ok-bg:     #e6f4ed;
+  --clr-erro:      #b0230f;
+  --clr-erro-bg:   #fdecea;
+  --clr-stripe:    #f5f9fc;
+  --radius:        10px;
+  --shadow:        0 2px 12px rgba(0,0,0,0.07);
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  min-height: 100vh;
+}
+
+.header {
+  background: var(--clr-primary);
+  color: #061961;
+  padding: 18px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.header-icon { font-size: 2rem; }
+.header-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.3px; }
+.header-sub   { font-size: 0.82rem; opacity: 0.8; margin-top: 2px; }
+
+.container {
+  max-width: 860px;
+  margin: 28px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.card {
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr-primary);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1 1 220px;
+}
+.field--small { flex: 0 1 130px; }
+.field--btn   { flex: 0 1 130px; }
+
+label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+input[type="text"],
+input[type="number"] {
+  border: 1.5px solid var(--clr-border);
+  border-radius: 7px;
+  padding: 9px 12px;
+  font-size: 0.97rem;
+  color: var(--clr-text);
+  background: #c3e5ff;
+  transition: border-color 0.15s;
+  outline: none;
+  width: 100%;
+}
+input:focus { border-color: var(--clr-primary); }
+
+#btn-cadastrar {
+  background: var(--clr-primary);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s;
+}
+#btn-cadastrar:hover:not(:disabled) { background: var(--clr-primary-h); }
+#btn-cadastrar:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.msg-feedback {
+  font-size: 0.88rem;
+  margin-top: 10px;
+  min-height: 20px;
+  border-radius: 6px;
+  padding: 0;
+}
+.msg-ok   { color: var(--clr-ok);   background: var(--clr-ok-bg);   padding: 7px 12px; }
+.msg-erro { color: var(--clr-erro); background: var(--clr-erro-bg); padding: 7px 12px; }
+
+.table-wrap { overflow-x: auto; }
+
+#lista-materiais {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+#lista-materiais thead th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--clr-muted);
+  border-bottom: 2px solid var(--clr-border);
+}
+#lista-materiais tbody tr:nth-child(even) { background: var(--clr-stripe); }
+#lista-materiais tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--clr-border);
+  color: var(--clr-text);
+}
+.td-qty   { font-weight: 600; }
+.td-empty { text-align: center; color: var(--clr-muted); padding: 28px 0; }
+.td-erro  { color: var(--clr-erro); }
+
+@media (max-width: 560px) {
+  .field, .field--small, .field--btn { flex: 1 1 100%; }
+}
