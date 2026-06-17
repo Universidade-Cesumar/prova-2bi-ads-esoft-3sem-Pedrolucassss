@@ -11,6 +11,7 @@ if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
 }
 
 if (typeof document !== "undefined") {
+
   const inputNome       = document.getElementById("input-nome");
   const inputQuantidade = document.getElementById("input-quantidade");
   const btnCadastrar    = document.getElementById("btn-cadastrar");
@@ -93,7 +94,7 @@ if (typeof document !== "undefined") {
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome, Policy: Number(quantidade) })
+        body: JSON.stringify({ nome, quantidade: Number(quantidade) })
       });
       if (!res.ok) throw new Error();
       inputNome.value = "";
@@ -108,8 +109,49 @@ if (typeof document !== "undefined") {
     }
   }
 
+  async function baixarMaterial(btn) {
+    const id           = btn.dataset.id;
+    const estoqueAtual = Number(btn.dataset.estoque);
+
+    const tr             = btn.closest("tr");
+    const inputRetirada  = tr.querySelector(".input-retirada");
+    const quantidadeRetirada = Number(inputRetirada.value);
+
+    if (!validarRetirada(estoqueAtual, quantidadeRetirada)) {
+      if (inputRetirada.value === "") {
+        showMsg("Informe a quantidade a retirar.", "erro");
+      } else if (quantidadeRetirada <= 0) {
+        showMsg("A quantidade deve ser maior que zero.", "erro");
+      } else {
+        showMsg(`Quantidade indisponível. Estoque atual: ${estoqueAtual}.`, "erro");
+      }
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Baixando...";
+
+    const novaQuantidade = estoqueAtual - quantidadeRetirada;
+
+    try {
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ quantidade: novaQuantidade })
+      });
+      if (!res.ok) throw new Error();
+      showMsg("Retirada realizada com sucesso!", "ok");
+      await carregarMateriais();
+    } catch {
+      showMsg("Erro ao realizar a baixa. Tente novamente.", "erro");
+      btn.disabled = false;
+      btn.textContent = "Baixar";
+    }
+  }
+
   async function excluirMaterial(btn) {
     const id = btn.dataset.id;
+
     if (!confirm("Tem certeza que deseja excluir este material?")) return;
 
     btn.disabled = true;
@@ -118,7 +160,7 @@ if (typeof document !== "undefined") {
     try {
       const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error();
-      showMsg("Material excluido com sucesso!", "ok");
+      showMsg("Material excluído com sucesso!", "ok");
       await carregarMateriais();
     } catch {
       showMsg("Erro ao excluir. Tente novamente.", "erro");
@@ -136,9 +178,13 @@ if (typeof document !== "undefined") {
   });
 
   tbody.addEventListener("click", e => {
+    const btnBaixar  = e.target.closest(".btn-baixar");
     const btnExcluir = e.target.closest(".btn-excluir");
+
+    if (btnBaixar)  baixarMaterial(btnBaixar);
     if (btnExcluir) excluirMaterial(btnExcluir);
   });
 
   carregarMateriais();
+
 }
