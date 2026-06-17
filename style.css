@@ -13,6 +13,10 @@
   --clr-erro:      #b0230f;
   --clr-erro-bg:   #fdecea;
   --clr-stripe:    #f5f9fc;
+  --clr-baixar:    #d97706;
+  --clr-baixar-h:  #b45309;
+  --clr-excluir:   #b0230f;
+  --clr-excluir-h: #8b1a0a;
   --radius:        10px;
   --shadow:        0 2px 12px rgba(0,0,0,0.07);
 }
@@ -24,25 +28,27 @@ body {
   min-height: 100vh;
 }
 
+/* ── Header ── */
 .header {
   background: var(--clr-primary);
-  color: #061961;
+  color: #ffffff;
   padding: 18px 24px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 .header-inner {
-  max-width: 860px;
+  max-width: 960px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 14px;
 }
-.header-icon { font-size: 2rem; }
+.header-icon  { font-size: 2rem; }
 .header-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.3px; }
 .header-sub   { font-size: 0.82rem; opacity: 0.8; margin-top: 2px; }
 
+/* ── Layout ── */
 .container {
-  max-width: 860px;
+  max-width: 960px;
   margin: 28px auto;
   padding: 0 16px;
   display: flex;
@@ -65,6 +71,7 @@ body {
   border-bottom: 1px solid var(--clr-border);
 }
 
+/* ── Formulário de Cadastro ── */
 .form-row {
   display: flex;
   flex-wrap: wrap;
@@ -117,6 +124,7 @@ input:focus { border-color: var(--clr-primary); }
 #btn-cadastrar:hover:not(:disabled) { background: var(--clr-primary-h); }
 #btn-cadastrar:disabled { opacity: 0.6; cursor: not-allowed; }
 
+/* ── Feedback ── */
 .msg-feedback {
   font-size: 0.88rem;
   margin-top: 10px;
@@ -127,6 +135,7 @@ input:focus { border-color: var(--clr-primary); }
 .msg-ok   { color: var(--clr-ok);   background: var(--clr-ok-bg);   padding: 7px 12px; }
 .msg-erro { color: var(--clr-erro); background: var(--clr-erro-bg); padding: 7px 12px; }
 
+/* ── Tabela ── */
 .table-wrap { overflow-x: auto; }
 
 #lista-materiais {
@@ -149,11 +158,60 @@ input:focus { border-color: var(--clr-primary); }
   padding: 10px 14px;
   border-bottom: 1px solid var(--clr-border);
   color: var(--clr-text);
+  vertical-align: middle;
 }
 .td-qty   { font-weight: 600; }
 .td-empty { text-align: center; color: var(--clr-muted); padding: 28px 0; }
 .td-erro  { color: var(--clr-erro); }
 
+/* ── Sprint 2: Retirada ── */
+.retirada-wrap {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.input-retirada {
+  width: 72px !important;
+  padding: 6px 8px !important;
+  font-size: 0.88rem !important;
+  flex: 0 0 72px;
+}
+
+/* ── Sprint 2: Botão Baixar ── */
+.btn-baixar {
+  background: var(--clr-baixar);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.btn-baixar:hover:not(:disabled) { background: var(--clr-baixar-h); }
+.btn-baixar:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Sprint 2: Botão Excluir ── */
+.btn-excluir {
+  background: var(--clr-excluir);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.btn-excluir:hover:not(:disabled) { background: var(--clr-excluir-h); }
+.btn-excluir:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Responsivo ── */
 @media (max-width: 560px) {
   .field, .field--small, .field--btn { flex: 1 1 100%; }
+  .retirada-wrap { flex-wrap: wrap; }
 }

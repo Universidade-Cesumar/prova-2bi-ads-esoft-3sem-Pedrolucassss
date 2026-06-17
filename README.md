@@ -1,6 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/B74p-HKt)
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 🗂️ Almoxarifado — Sistema de Controle de Estoque
 
 Sistema web de controle de estoque desenvolvido para o setor de Enfermagem, permitindo o cadastro e a listagem de materiais com integração a uma API na nuvem.
@@ -41,4 +44,8 @@ Os seguintes IDs estão implementados conforme exigido pelo autograding:
 input-nome — Input do nome do material
 input-quantidade — Input da quantidade
 btn-cadastrar — Botão de cadastro
+<<<<<<< Updated upstream
 lista-materiais — Tabela de listage
+=======
+lista-materiais — Tabela de listage
+>>>>>>> Stashed changes
