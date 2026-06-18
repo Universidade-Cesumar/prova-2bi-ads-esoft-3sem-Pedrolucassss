@@ -4,13 +4,13 @@
 
 Sistema de gerenciamento para controle interno de insumos e materiais de enfermagem. Desenvolvido para facilitar o fluxo de entrada, saída e descarte de materiais de forma segura e responsiva.
 
-## 🚀 Funcionalidades da Sprint 2
+# Funcionalidades da Sprint 2
 
 - **Validação de Baixa Segura:** Implementação de regras de negócio rígidas que impedem a retirada de quantidades negativas, nulas ou superiores ao volume disponível em estoque.
 - **Módulo de Retirada (PUT):** Atualização dinâmica do banco de dados ao realizar retiradas parciais de materiais.
 - **Módulo de Exclusão (DELETE):** Remoção completa de itens obsoletos ou cadastrados erroneamente com confirmação de segurança.
 
-## 🛠️ Contrato de Endpoints Utilizados (MockAPI)
+#  Contrato de Endpoints Utilizados (MockAPI)
 
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
