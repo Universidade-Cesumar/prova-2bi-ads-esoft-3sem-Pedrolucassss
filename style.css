@@ -215,3 +215,73 @@ input:focus { border-color: var(--clr-primary); }
   .field, .field--small, .field--btn { flex: 1 1 100%; }
   .retirada-wrap { flex-wrap: wrap; }
 }
+
+/* ── Sprint 3: Dashboard ── */
+.dashboard-card { padding: 20px 24px; }
+
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.dashboard-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dashboard-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--clr-muted);
+}
+
+.dashboard-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  line-height: 1;
+}
+
+#input-busca {
+  min-width: 280px;
+  padding: 10px 14px;
+  font-size: 0.97rem;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 7px;
+  background: #c3e5ff;
+  color: var(--clr-text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+#input-busca:focus { border-color: var(--clr-primary); }
+
+/* ── Sprint 3: Estoque Crítico ── */
+tr.estoque-critico {
+  background: #fff8e6 !important;
+}
+tr.estoque-critico td {
+  color: #7a4f00;
+}
+
+.badge-critico {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 4px;
+  padding: 1px 6px;
+  vertical-align: middle;
+}
+
+@media (max-width: 560px) {
+  #input-busca { min-width: 100%; }
+  .dashboard-grid { flex-direction: column; align-items: flex-start; }
+}
