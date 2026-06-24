@@ -12,7 +12,7 @@
     <div class="header-inner">
       <span class="header-icon">👨🏽‍⚕️</span>
       <div>
-        <h1 class="header-title">Almoxarifado de Enfermagem </h1>
+        <h1 class="header-title">Almoxarifado de Enfermagem</h1>
         <p class="header-sub">Controle de Estoque · Enfermagem</p>
       </div>
     </div>
@@ -20,6 +20,25 @@
 
   <main class="container">
 
+    <!-- Dashboard -->
+    <section class="card dashboard-card">
+      <div class="dashboard-grid">
+        <div class="dashboard-item">
+          <span class="dashboard-label">Total de Itens</span>
+          <span id="total-itens" class="dashboard-value">0</span>
+        </div>
+        <div class="dashboard-item">
+          <input
+            type="text"
+            id="input-busca"
+            placeholder="🔍 Pesquisar material..."
+            autocomplete="off"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Cadastro -->
     <section class="card form-card">
       <h2 class="section-title">Cadastrar Material</h2>
       <div class="form-row">
@@ -38,6 +57,7 @@
       <p id="msg-feedback" class="msg-feedback"></p>
     </section>
 
+    <!-- Listagem -->
     <section class="card list-card">
       <h2 class="section-title">Materiais em Estoque</h2>
       <div class="table-wrap">
