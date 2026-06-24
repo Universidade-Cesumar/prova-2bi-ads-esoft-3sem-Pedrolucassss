@@ -1,25 +1,11 @@
 const API_URL = "https://6a29f022f59cb8f65f1dd695.mockapi.io/api/v1/materiais";
 
-// ─── Sprint 2: Validação de Retirada ────────────────────────────────────────
-
-/**
- * Valida se a retirada é permitida.
- * @param {number} estoqueAtual       - Quantidade atual no estoque.
- * @param {number} quantidadeRetirada - Quantidade que se deseja retirar.
- * @returns {boolean} true se válido, false se inválido.
- */
 function validarRetirada(estoqueAtual, quantidadeRetirada) {
   if (quantidadeRetirada <= 0) return false;
   if (quantidadeRetirada > estoqueAtual) return false;
   return true;
 }
 
-// ─── Exporta para testes Jest ────────────────────────────────────────────────
-if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
-  module.exports = { validarRetirada };
-}
-
-// ─── Guarda de ambiente: só executa no browser ───────────────────────────────
 if (typeof document !== "undefined") {
 
   const inputNome       = document.getElementById("input-nome");
@@ -30,10 +16,7 @@ if (typeof document !== "undefined") {
   const inputBusca      = document.getElementById("input-busca");
   const totalItens      = document.getElementById("total-itens");
 
-  // Cache dos materiais carregados para filtrar localmente
   let todosMateriais = [];
-
-  // ── Utilitários ──────────────────────────────────────────────────────────
 
   function showMsg(texto, tipo = "ok") {
     msgFeedback.textContent = texto;
@@ -44,13 +27,9 @@ if (typeof document !== "undefined") {
     }, 3000);
   }
 
-  // ── Sprint 3: Dashboard ───────────────────────────────────────────────────
-
   function atualizarDashboard(materiais) {
     totalItens.textContent = materiais.length;
   }
-
-  // ── Renderização ─────────────────────────────────────────────────────────
 
   function renderTabela(materiais) {
     tbody.innerHTML = "";
@@ -63,7 +42,6 @@ if (typeof document !== "undefined") {
     materiais.forEach((item, index) => {
       const tr = document.createElement("tr");
 
-      // Sprint 3: estoque crítico (menos de 10 unidades)
       if (item.quantidade < 10) {
         tr.classList.add("estoque-critico");
       }
@@ -101,19 +79,14 @@ if (typeof document !== "undefined") {
     });
   }
 
-  // ── Sprint 3: Filtro de Busca ─────────────────────────────────────────────
-
   function filtrarMateriais() {
     const termo = inputBusca.value.trim().toLowerCase();
     const filtrados = todosMateriais.filter(item =>
       (item.nome || "").toLowerCase().includes(termo)
     );
     renderTabela(filtrados);
-    // total-itens sempre mostra o total geral, não o filtrado
     atualizarDashboard(todosMateriais);
   }
-
-  // ── GET ──────────────────────────────────────────────────────────────────
 
   async function carregarMateriais() {
     try {
@@ -122,14 +95,12 @@ if (typeof document !== "undefined") {
       const dados = await res.json();
       todosMateriais = dados;
       atualizarDashboard(dados);
-      filtrarMateriais(); // aplica filtro ativo ao recarregar
+      filtrarMateriais();
     } catch (err) {
       console.error(err);
       tbody.innerHTML = `<tr><td colspan="5" class="td-empty td-erro">⚠️ Sem conexão. Verifique sua internet e tente novamente.</td></tr>`;
     }
   }
-
-  // ── POST ─────────────────────────────────────────────────────────────────
 
   async function cadastrarMaterial() {
     const nome       = inputNome.value.trim();
@@ -163,14 +134,11 @@ if (typeof document !== "undefined") {
     }
   }
 
-  // ── PUT (baixa de estoque) ────────────────────────────────────────────────
-
   async function baixarMaterial(btn) {
     const id           = btn.dataset.id;
     const estoqueAtual = Number(btn.dataset.estoque);
-
-    const tr             = btn.closest("tr");
-    const inputRetirada  = tr.querySelector(".input-retirada");
+    const tr           = btn.closest("tr");
+    const inputRetirada = tr.querySelector(".input-retirada");
     const quantidadeRetirada = Number(inputRetirada.value);
 
     if (!validarRetirada(estoqueAtual, quantidadeRetirada)) {
@@ -206,8 +174,6 @@ if (typeof document !== "undefined") {
     }
   }
 
-  // ── DELETE ───────────────────────────────────────────────────────────────
-
   async function excluirMaterial(btn) {
     const id = btn.dataset.id;
 
@@ -229,8 +195,6 @@ if (typeof document !== "undefined") {
     }
   }
 
-  // ── Event Listeners ──────────────────────────────────────────────────────
-
   btnCadastrar.addEventListener("click", cadastrarMaterial);
 
   [inputNome, inputQuantidade].forEach(el => {
@@ -239,10 +203,8 @@ if (typeof document !== "undefined") {
     });
   });
 
-  // Sprint 3: filtro em tempo real
   inputBusca.addEventListener("input", filtrarMateriais);
 
-  // Delegação de eventos para botões dinâmicos da tabela
   tbody.addEventListener("click", e => {
     const btnBaixar  = e.target.closest(".btn-baixar");
     const btnExcluir = e.target.closest(".btn-excluir");
@@ -251,8 +213,5 @@ if (typeof document !== "undefined") {
     if (btnExcluir) excluirMaterial(btnExcluir);
   });
 
-  // ── Inicialização ────────────────────────────────────────────────────────
-
   carregarMateriais();
-
-} // fim do guard de browser
+}
